@@ -1,0 +1,7 @@
+services:
+  explainer:
+    build: .
+    ports:
+      - "9100:9100"
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
