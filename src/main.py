@@ -46,8 +46,7 @@ def main():
             continue
 
         if not check_ollama(args.ollama_url):
-            print("Ollama not available. Use --summary for offline mode.")
-            continue
+            print("Ollama not available, attempting OpenAI fallback (if configured)...")
 
         print("Analyzing...")
         try:
@@ -66,7 +65,7 @@ def _start_server(args):
                 print(f"Alert: {alert.name} ({alert.severity})")
                 try:
                     print(explain_alert(alert.to_prompt(), args.ollama_url, args.model))
-                except:
+                except Exception:
                     pass
             self.send_response(200)
             self.end_headers()
